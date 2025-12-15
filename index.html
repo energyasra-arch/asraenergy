@@ -1,0 +1,1512 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#FFF7ED" />
+  <title>아스라에너지 | 포근한 절감 스튜디오</title>
+  <meta name="description" content="전기요금은 ‘총량’이 아니라 ‘패턴’입니다. 업종별로 쉽고 친절하게 절감 방법을 배우고, 미니 계산기와 번개 닷지 게임으로 경험해보세요." />
+  <meta property="og:title" content="아스라에너지 | 포근한 절감 스튜디오" />
+  <meta property="og:description" content="전기요금 절감 지식 + 미니 계산기 + 번개 닷지 게임. 친절하고 직관적으로, 오늘 당장 바꿀 수 있게." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://YOUR_DOMAIN_OR_PAGES_URL/" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' rx='18' fill='%23FFF7ED'/%3E%3Cpath d='M33 8 14 36h14l-2 18 24-30H36l-3-16z' fill='%23F97316'/%3E%3C/svg%3E"/>
+
+  <style>
+    :root{
+      /* Warm studio palette */
+      --bg: #FFFBF6;
+      --paper: #FFFFFF;
+      --paper2: #FFF7ED;
+      --stroke: rgba(15, 23, 42, .10);
+      --stroke2: rgba(15, 23, 42, .14);
+      --text: #0B1220;
+      --muted: rgba(15, 23, 42, .62);
+      --muted2: rgba(15, 23, 42, .46);
+
+      --brand: #F97316;         /* warm orange */
+      --brand2:#FB923C;         /* lighter orange */
+      --brand3:#EA580C;         /* deeper orange */
+      --leaf:  #16A34A;         /* eco green */
+      --sky:   #2563EB;         /* calm blue accent */
+
+      --shadow: 0 18px 60px rgba(15, 23, 42, .10);
+      --shadow2: 0 10px 30px rgba(15, 23, 42, .10);
+      --radius: 22px;
+      --radius2: 16px;
+
+      --max: 1120px;
+      --font: ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo", "SF Pro Text", Segoe UI, Roboto, Helvetica, Arial;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1100px 700px at 15% -10%, rgba(249,115,22,.18), transparent 55%),
+        radial-gradient(900px 600px at 110% 15%, rgba(37,99,235,.12), transparent 60%),
+        radial-gradient(900px 600px at 50% 120%, rgba(22,163,74,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), #FFFFFF);
+    }
+
+    a{ color: inherit; text-decoration:none; }
+    .wrap{ width:100%; max-width: var(--max); margin:0 auto; padding: 18px 16px 80px; }
+
+    /* ---------- Animations (gentle, readability-first) ---------- */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    }
+
+    .fade-up{
+      opacity:0;
+      transform: translateY(10px);
+      animation: fadeUp .65s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .fade-up.d2{ animation-delay:.10s; }
+    .fade-up.d3{ animation-delay:.20s; }
+    .fade-up.d4{ animation-delay:.30s; }
+
+    @keyframes fadeUp{
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .floaty{
+      animation: floaty 5.2s ease-in-out infinite;
+    }
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-3px); }
+    }
+
+    /* ---------- Topbar ---------- */
+    .nav{
+      position: sticky; top: 10px; z-index: 30;
+      background: rgba(255,255,255,.74);
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow2);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      padding: 10px 12px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+
+    .brandRow{ display:flex; align-items:center; gap:10px; min-width: 220px; }
+    .logo{
+      width:36px; height:36px; border-radius: 14px;
+      display:grid; place-items:center;
+      background: radial-gradient(circle at 30% 30%, rgba(249,115,22,.22), transparent 60%), var(--paper2);
+      border:1px solid rgba(249,115,22,.22);
+    }
+    .logo svg{ width:20px; height:20px; fill: var(--brand3); }
+
+    .brandText b{
+      font-size: 12px;
+      letter-spacing:.26em;
+      text-transform: uppercase;
+    }
+    .brandText small{
+      display:block;
+      margin-top:2px;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing:-.01em;
+    }
+
+    .navLinks{
+      display:flex; gap:10px; align-items:center; justify-content:flex-end; flex-wrap:wrap;
+    }
+
+    .chip{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.70);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 12px;
+      cursor:pointer;
+      user-select:none;
+      display:inline-flex; align-items:center; gap:8px;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(15,23,42,.08);
+      background: rgba(255,255,255,.92);
+      color: var(--text);
+    }
+
+    .btn{
+      border:0;
+      cursor:pointer;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing:-.01em;
+      color: #3B1A00;
+      background: radial-gradient(circle at 20% 0%, #FFE6D5, #FB923C 35%, #F97316 80%);
+      box-shadow: 0 16px 40px rgba(249,115,22,.22);
+      transition: transform .12s ease, filter .12s ease;
+      white-space: nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+    .btn:active{ transform: translateY(0); }
+
+    /* ---------- Hero ---------- */
+    .hero{
+      margin-top: 14px;
+      border-radius: var(--radius);
+      border:1px solid var(--stroke);
+      background:
+        radial-gradient(900px 500px at 15% 20%, rgba(249,115,22,.14), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(37,99,235,.10), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+      box-shadow: var(--shadow);
+      padding: 26px 18px 18px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    @media (max-width: 900px){
+      .heroGrid{ grid-template-columns: 1fr; }
+      .brandRow{ min-width: auto; }
+    }
+
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(249,115,22,.22);
+      background: rgba(255,247,237,.70);
+      color: #7C2D12;
+      font-size: 12px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius: 99px;
+      background: var(--brand);
+      box-shadow: 0 0 16px rgba(249,115,22,.45);
+    }
+
+    h1{
+      margin: 10px 0 10px;
+      font-size: clamp(28px, 4.0vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+    .grad{
+      background: linear-gradient(120deg, #EA580C, #FB923C, #F97316);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color: transparent;
+      background-size: 220% 220%;
+      animation: gradMove 7s ease-in-out infinite;
+    }
+    @keyframes gradMove{
+      0%{ background-position: 0% 50%; }
+      50%{ background-position: 100% 50%; }
+      100%{ background-position: 0% 50%; }
+    }
+
+    .lead{
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+    .lead b{ color: var(--text); }
+
+    .heroMeta{
+      margin-top: 14px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .miniCard{
+      flex: 1 1 220px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.80);
+      border-radius: var(--radius2);
+      padding: 12px 12px;
+      box-shadow: 0 14px 34px rgba(15,23,42,.06);
+      display:flex; gap:10px; align-items:flex-start;
+      transition: transform .14s ease;
+    }
+    .miniCard:hover{ transform: translateY(-2px); }
+    .icon{
+      width:28px; height:28px; border-radius: 12px;
+      display:grid; place-items:center;
+      border:1px solid rgba(249,115,22,.22);
+      background: rgba(255,247,237,.85);
+      color: var(--brand3);
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+    .miniCard b{ display:block; font-size: 13px; letter-spacing:-.02em; }
+    .miniCard small{ display:block; margin-top:2px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+
+    /* ---------- Sections ---------- */
+    .section{
+      margin-top: 18px;
+      border-radius: var(--radius);
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .secHead{
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid rgba(15,23,42,.08);
+      background: linear-gradient(180deg, rgba(255,247,237,.55), rgba(255,255,255,.0));
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .secHead h2{ margin:0; font-size: 16px; letter-spacing:-.02em; }
+    .secHead p{ margin:6px 0 0; font-size: 12px; color: var(--muted); line-height:1.6; max-width: 76ch; }
+    .secBody{ padding: 14px 16px 18px; }
+
+    /* ---------- Cards grid ---------- */
+    .grid{
+      display:grid; gap: 12px;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+    }
+    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 640px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      border-radius: 18px;
+      border:1px solid rgba(15,23,42,.10);
+      background: rgba(255,255,255,.86);
+      padding: 14px 14px 12px;
+      box-shadow: 0 12px 28px rgba(15,23,42,.06);
+      cursor:pointer;
+      transition: transform .14s ease, box-shadow .14s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 18px 44px rgba(15,23,42,.10);
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border:1px solid rgba(249,115,22,.18);
+      background: rgba(255,247,237,.75);
+      color: #7C2D12;
+      margin-bottom: 10px;
+    }
+    .card h3{
+      margin:0 0 6px;
+      font-size: 14px;
+      letter-spacing:-.02em;
+      line-height:1.25;
+    }
+    .card p{
+      margin:0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      min-height: 54px;
+    }
+    .foot{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--muted2);
+      gap: 10px;
+    }
+
+    /* ---------- Calculator ---------- */
+    .toolGrid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+    @media (max-width: 900px){
+      .toolGrid{ grid-template-columns: 1fr; }
+    }
+
+    .toolCard{
+      border-radius: 18px;
+      border:1px solid rgba(15,23,42,.10);
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 14px 34px rgba(15,23,42,.08);
+      padding: 14px;
+      overflow:hidden;
+      position:relative;
+    }
+    .toolTop{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      margin-bottom: 8px;
+    }
+    .badge{
+      font-size: 11px;
+      border:1px solid rgba(249,115,22,.16);
+      background: rgba(255,247,237,.85);
+      color: #7C2D12;
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+
+    .toolDesc{
+      margin:0 0 12px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    label{ display:block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    input, select{
+      width:100%;
+      padding: 10px 11px;
+      border-radius: 14px;
+      border:1px solid rgba(15,23,42,.14);
+      background: rgba(255,255,255,.96);
+      outline:none;
+      font-size: 13px;
+      transition: box-shadow .12s ease, transform .08s ease;
+    }
+    input:focus, select:focus{
+      box-shadow: 0 0 0 4px rgba(249,115,22,.16);
+      transform: translateY(-.5px);
+    }
+
+    .row2{ display:grid; gap:10px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+    @media (max-width: 520px){ .row2{ grid-template-columns: 1fr; } }
+
+    .resultBox{
+      border-radius: 16px;
+      border:1px solid rgba(22,163,74,.20);
+      background: rgba(240,253,244,.75);
+      padding: 12px;
+      display:grid; gap:8px;
+    }
+    .kpi{
+      display:flex; justify-content:space-between; gap:10px; align-items:baseline;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border:1px solid rgba(15,23,42,.08);
+      background: rgba(255,255,255,.85);
+    }
+    .kpi b{ font-size: 13px; }
+    .kpi span{ font-size: 13px; font-weight: 900; color: var(--brand3); }
+    .kpi small{ display:block; color: var(--muted2); font-size: 11px; margin-top:2px; }
+
+    .hint{
+      margin: 0;
+      font-size: 11px;
+      color: var(--muted2);
+      line-height: 1.55;
+    }
+
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; }
+    .ghost{
+      background: rgba(255,255,255,.90);
+      border:1px solid rgba(15,23,42,.12);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    /* ---------- Game ---------- */
+    .gameWrap{
+      display:grid; gap: 10px;
+    }
+    canvas{
+      width:100%;
+      height: 320px;
+      border-radius: 18px;
+      border:1px solid rgba(15,23,42,.10);
+      background:
+        radial-gradient(700px 260px at 30% 20%, rgba(249,115,22,.12), transparent 55%),
+        radial-gradient(600px 260px at 80% 10%, rgba(37,99,235,.10), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+      box-shadow: 0 14px 34px rgba(15,23,42,.08);
+      display:block;
+    }
+    .gameBar{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      flex-wrap:wrap;
+    }
+    .gameBar .pill2{
+      border:1px solid rgba(15,23,42,.10);
+      background: rgba(255,255,255,.86);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .kbd{
+      font-weight:900; color: var(--text);
+      border:1px solid rgba(15,23,42,.12);
+      padding: 1px 6px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.92);
+      margin: 0 2px;
+    }
+
+    /* ---------- Modal ---------- */
+    .modal{
+      position: fixed; inset:0;
+      display:none;
+      place-items:center;
+      background: rgba(15,23,42,.24);
+      backdrop-filter: blur(10px);
+      z-index: 80;
+      padding: 16px;
+    }
+    .modal.open{ display:grid; }
+    .modalBox{
+      width: min(900px, 100%);
+      max-height: 86vh;
+      overflow:hidden;
+      border-radius: 22px;
+      border:1px solid rgba(15,23,42,.12);
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow);
+      display:flex; flex-direction:column;
+    }
+    .modalHead{
+      padding: 12px 12px;
+      border-bottom:1px solid rgba(15,23,42,.08);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      background: linear-gradient(180deg, rgba(255,247,237,.60), rgba(255,255,255,.0));
+    }
+    .modalHead b{ font-size: 13px; letter-spacing:-.01em; }
+    .x{
+      border:1px solid rgba(15,23,42,.12);
+      background: rgba(255,255,255,.92);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+    }
+    .modalBody{
+      padding: 14px;
+      overflow:auto;
+      color: var(--text);
+    }
+    .article{ display:grid; gap: 10px; }
+    .article p{ margin:0; color: var(--muted); line-height: 1.75; font-size: 13px; }
+    .callout{
+      border-radius: 16px;
+      border:1px solid rgba(249,115,22,.18);
+      background: rgba(255,247,237,.82);
+      padding: 12px;
+      color: var(--text);
+    }
+    .callout b{ color: var(--brand3); }
+    .bullets{ margin:0; padding-left: 18px; color: var(--muted); line-height:1.75; font-size: 13px; }
+    .bullets li{ margin: 4px 0; }
+    .divider{
+      height:1px; background: rgba(15,23,42,.08);
+      margin: 8px 0;
+    }
+
+    /* ---------- Toast ---------- */
+    .toast{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 90;
+      display:grid; gap:8px;
+      max-width: min(420px, calc(100vw - 28px));
+    }
+    .tItem{
+      border-radius: 18px;
+      border: 1px solid rgba(15,23,42,.12);
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow2);
+      padding: 12px 12px;
+      display:flex; gap:10px; align-items:flex-start;
+      animation: pop .18s ease-out;
+    }
+    @keyframes pop{ from{ transform: translateY(6px); opacity:0 } to{ transform: translateY(0); opacity:1 } }
+    .tDot{ width:10px; height:10px; border-radius:99px; background: var(--brand); margin-top:4px; box-shadow: 0 0 14px rgba(249,115,22,.35); }
+    .tItem b{ display:block; font-size: 12px; }
+    .tItem small{ display:block; color: var(--muted); margin-top:3px; line-height:1.4; }
+
+    /* ---------- Footer ---------- */
+    footer{
+      margin-top: 16px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+      padding: 14px 6px 0;
+    }
+    .footRow{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; align-items:center; margin-top: 10px; }
+    .sr{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- NAV -->
+    <div class="nav fade-up" role="navigation" aria-label="상단 메뉴">
+      <div class="brandRow">
+        <div class="logo floaty" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 12-14h-7l-1-6z"/></svg>
+        </div>
+        <div class="brandText">
+          <b><span style="color:var(--brand3)">ASRA</span> ENERGY</b>
+          <small>포근한 절감 스튜디오 · “숫자로 친절하게”</small>
+        </div>
+      </div>
+
+      <div class="navLinks">
+        <button class="chip" data-scroll="#library">📚 지식</button>
+        <button class="chip" data-scroll="#playbook">🧩 업종별 절감</button>
+        <button class="chip" data-scroll="#calc">🧮 계산기</button>
+        <button class="chip" data-scroll="#game">⚡ 게임</button>
+        <button class="btn" data-scroll="#calc">오늘 절감액 보기</button>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero fade-up d2" aria-label="메인 소개">
+      <div class="heroGrid">
+        <div>
+          <div class="pill"><span class="dot"></span> “전기요금은 ‘기계’보다 ‘습관(패턴)’이 더 큽니다.”</div>
+          <h1>
+            전기요금 절감은<br/>
+            <span class="grad">어렵지 않게, 오늘부터</span> 가능합니다.
+          </h1>
+          <p class="lead">
+            아스라에너지는 “뭔가를 팔기”보다, <b>이해시키는 것</b>에 집중합니다.  
+            당신의 사업장에 맞게 <b>피크(몰림)·야간 누수·냉난방 습관</b>만 정리해도,
+            “과장 없이” <b>실제로 줄어드는 구간</b>이 생깁니다.
+          </p>
+
+          <div class="heroMeta fade-up d3" aria-label="핵심 원칙">
+            <div class="miniCard">
+              <div class="icon">①</div>
+              <div>
+                <b>먼저 ‘왜 비싼지’를 한 문장으로</b>
+                <small>원인을 알아야, 돈이 새는 구멍을 막습니다.</small>
+              </div>
+            </div>
+            <div class="miniCard">
+              <div class="icon">②</div>
+              <div>
+                <b>그 다음 ‘가장 쉬운 1개’부터</b>
+                <small>의지가 아니라 “자동화”가 절감을 지속시킵니다.</small>
+              </div>
+            </div>
+            <div class="miniCard">
+              <div class="icon">③</div>
+              <div>
+                <b>끝으로 ‘지구에게도 좋은 습관’</b>
+                <small>돈도 아끼고, 전력도 덜 쓰는 방향으로.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="toolCard fade-up d4" aria-label="오늘의 60초 안내">
+          <div class="toolTop">
+            <h2 style="margin:0;font-size:15px;letter-spacing:-.02em;">60초만에 “내 가게” 감 잡기</h2>
+            <span class="badge">친절한 시작 · 부담 0</span>
+          </div>
+          <p class="toolDesc">
+            아래에서 <b>업종별 절감</b>을 먼저 읽고,  
+            <b>계산기</b>로 “대략의 절감액”을 확인하고,  
+            마지막으로 <b>번개 게임</b>으로 “피크(몰림)” 감각을 재미있게 익혀요.
+          </p>
+
+          <div class="resultBox" style="border-color: rgba(249,115,22,.18); background: rgba(255,247,237,.85);">
+            <div class="kpi">
+              <div>
+                <b>오늘 할 1가지(추천)</b>
+                <small id="todayOne">냉난방 “감” 조절 → 기준을 만들기</small>
+              </div>
+              <span>10분</span>
+            </div>
+            <p class="hint">
+              팁: “아무것도 안 바꾸는 날”이 쌓이면, 요금도 그대로 쌓입니다.  
+              <b>10분짜리 1개</b>가 가장 강력해요.
+            </p>
+          </div>
+
+          <div class="actions" style="margin-top:10px;">
+            <button class="btn ghost" data-scroll="#playbook">업종별로 보기</button>
+            <button class="btn" data-scroll="#calc">절감액 계산하기</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SECTION: Library -->
+    <section class="section fade-up" id="library" aria-label="지식 라이브러리">
+      <div class="secHead">
+        <div>
+          <h2>지식 라이브러리 · 읽자마자 “아, 그렇구나”</h2>
+          <p>짧고 직관적으로. 어려운 말 대신 “바로 적용할 수 있는 규칙”만 모았습니다.</p>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <label for="q" class="sr">검색</label>
+          <input id="q" placeholder="검색: 피크 / 냉난방 / 간판 / 야간 / 헬스장 ..." style="width:min(420px,100%);" />
+          <button class="chip" id="clearSearch">지우기</button>
+        </div>
+      </div>
+      <div class="secBody">
+        <div class="grid" id="kGrid"></div>
+        <p class="hint" style="margin-top:12px;">
+          민호야, 사람들이 알아서 오게 만드는 건 “한 방”이 아니라 <b>좋은 글의 축적</b>이야.
+          그래서 이 사이트는 “읽기 좋게, 계속 늘어나는 구조”로 만들었어.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION: Playbook -->
+    <section class="section fade-up" id="playbook" aria-label="업종별 절감">
+      <div class="secHead">
+        <div>
+          <h2>업종별 절감 · 내 업종만 보면 바로 이해</h2>
+          <p>카페/식당/헬스장/숙박/학원/사무실/공장. 업종마다 “새는 구멍”이 다릅니다.</p>
+        </div>
+      </div>
+      <div class="secBody">
+        <div class="grid" id="bizGrid"></div>
+      </div>
+    </section>
+
+    <!-- SECTION: Calculator + Game -->
+    <section class="section fade-up" id="calc" aria-label="전기요금 계산기">
+      <div class="secHead">
+        <div>
+          <h2>미니멀 계산기 · “내가 줄일 수 있는 돈”을 숫자로</h2>
+          <p>정확한 고지서 계산이 아니라, <b>현실적인 ‘대략’</b>을 빠르게 잡는 도구입니다. (과장 없이)</p>
+        </div>
+      </div>
+
+      <div class="secBody toolGrid">
+        <!-- Calculator -->
+        <div class="toolCard" aria-label="절감 계산기">
+          <div class="toolTop">
+            <h3 style="margin:0;font-size:14px;letter-spacing:-.02em;">절감액 추정기</h3>
+            <span class="badge">초간단 · 30초</span>
+          </div>
+          <p class="toolDesc">
+            “월 전기요금”과 “개선 가능성(습관/패턴)”만 넣으면,
+            <b>월/연 절감액</b>과 <b>탄소 절감 감각</b>을 미니멀하게 보여줍니다.
+          </p>
+
+          <form id="calcForm">
+            <div class="row2">
+              <div>
+                <label for="cBiz">업종</label>
+                <select id="cBiz" required>
+                  <option value="">선택</option>
+                  <option value="카페">카페</option>
+                  <option value="식당">식당</option>
+                  <option value="헬스장">헬스장</option>
+                  <option value="모텔/숙박">모텔/숙박</option>
+                  <option value="학원">학원</option>
+                  <option value="사무실">사무실</option>
+                  <option value="공장/창고">공장/창고</option>
+                  <option value="기타">기타</option>
+                </select>
+              </div>
+              <div>
+                <label for="bill">월 전기요금(원)</label>
+                <input id="bill" type="number" inputmode="numeric" placeholder="예: 1200000" min="0" required />
+              </div>
+            </div>
+
+            <div class="row2">
+              <div>
+                <label for="level">현재 관리 수준</label>
+                <select id="level" required>
+                  <option value="0.06">이미 꽤 관리됨 (작게 줄일 듯)</option>
+                  <option value="0.12" selected>보통 (현실적인 절감)</option>
+                  <option value="0.20">관리 거의 없음 (쉬운 절감 많음)</option>
+                </select>
+              </div>
+              <div>
+                <label for="focus">우선 타깃</label>
+                <select id="focus" required>
+                  <option value="peak" selected>피크(동시가동) 줄이기</option>
+                  <option value="night">야간 누수 끊기</option>
+                  <option value="hvac">냉난방 습관 정리</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="actions" style="margin-top:10px;">
+              <button class="btn" type="submit">절감액 계산</button>
+              <button class="btn ghost" type="button" id="fillExample">예시 넣기</button>
+            </div>
+          </form>
+
+          <div style="margin-top:12px;" class="resultBox" id="calcOut" aria-live="polite">
+            <div class="kpi">
+              <div>
+                <b>예상 월 절감액</b>
+                <small id="mHint">입력 후 계산해보세요</small>
+              </div>
+              <span id="mSave">—</span>
+            </div>
+            <div class="kpi">
+              <div>
+                <b>예상 연 절감액</b>
+                <small id="yHint">월 절감액 × 12</small>
+              </div>
+              <span id="ySave">—</span>
+            </div>
+            <div class="kpi">
+              <div>
+                <b>지구에 남기는 여유(감각)</b>
+                <small id="co2Hint">대략적인 감각 값</small>
+              </div>
+              <span id="co2Save">—</span>
+            </div>
+            <p class="hint" id="nextStep" style="margin-top:2px;">
+              팁: 계산 결과가 크면, “의지” 말고 <b>자동화(타이머/스케줄)</b>부터 붙이면 유지가 됩니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- Game -->
+        <div class="toolCard" id="game" aria-label="번개 피하기 게임">
+          <div class="toolTop">
+            <h3 style="margin:0;font-size:14px;letter-spacing:-.02em;">번개 닷지 · 피크를 몸으로 이해하기</h3>
+            <span class="badge">작지만 중독 X · 1분</span>
+          </div>
+          <p class="toolDesc">
+            번개(피크)가 떨어지는 걸 피하세요.  
+            오래 버티는 요령은 “멈추기”가 아니라 <b>미리 분산</b>하는 움직임입니다.
+          </p>
+
+          <div class="gameWrap">
+            <canvas id="gameCanvas" width="900" height="320" aria-label="번개 피하기 게임"></canvas>
+            <div class="gameBar">
+              <div class="pill2">
+                조작: <span class="kbd">←</span><span class="kbd">→</span> 또는 <span class="kbd">A</span><span class="kbd">D</span> · 모바일: 드래그
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                <span class="pill2">점수: <b id="score">0</b></span>
+                <button class="btn ghost" id="startGame">시작</button>
+                <button class="btn" id="resetGame">리셋</button>
+              </div>
+            </div>
+            <p class="hint">
+              연결: 피크는 “한 번에 몰리는 순간”이에요. 게임에서 ‘겹침’을 피하면, 현실에서도 절감이 쉬워집니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="fade-up">
+      <b style="color:var(--brand3)">ASRA ENERGY</b> · 포근한 절감 스튜디오 · 문의: <a href="mailto:energyasra@gmail.com" style="text-decoration:underline;">energyasra@gmail.com</a><br/>
+      <span style="opacity:.9;">원칙: 과장하지 않기 · 먼저 이해시키기 · 가장 쉬운 1개부터</span>
+      <div class="footRow">
+        <span class="chip" style="cursor:default;">대표: 정민호</span>
+        <span class="chip" style="cursor:default;">© <span id="year"></span> ASRA ENERGY</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="콘텐츠 상세">
+    <div class="modalBox">
+      <div class="modalHead">
+        <b id="modalTitle">—</b>
+        <button class="x" id="closeModal">닫기</button>
+      </div>
+      <div class="modalBody" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // ---------------- Utils ----------------
+    const $ = (q, el=document) => el.querySelector(q);
+    const $$ = (q, el=document) => Array.from(el.querySelectorAll(q));
+    const toastEl = $("#toast");
+
+    function fmtKRW(n){
+      if(!isFinite(n)) return "—";
+      const v = Math.max(0, Math.round(n));
+      return v.toLocaleString("ko-KR") + "원";
+    }
+    function toast(title, msg){
+      const item = document.createElement("div");
+      item.className = "tItem";
+      item.innerHTML = `
+        <div class="tDot" aria-hidden="true"></div>
+        <div>
+          <b>${title}</b>
+          <small>${msg}</small>
+        </div>
+      `;
+      toastEl.appendChild(item);
+      setTimeout(() => { item.style.opacity = "0"; item.style.transform = "translateY(6px)"; }, 2600);
+      setTimeout(() => item.remove(), 3200);
+    }
+    function scrollToId(id){
+      const el = document.querySelector(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+    $$("[data-scroll]").forEach(b => b.addEventListener("click", () => scrollToId(b.getAttribute("data-scroll"))));
+
+    // ---------------- Today one thing (rotator) ----------------
+    const suggestions = [
+      "마감 1분: 간판/조명 OFF를 ‘타이머’로 고정하기",
+      "피크 10분: 큰 장비 켜는 순서를 10분만 분산하기",
+      "냉난방: ‘감’ 대신 온도·풍량 기준을 메모로 붙이기",
+      "야간 누수: 멀티탭 스위치로 대기전력 끊기",
+      "환기: ‘연속’ 대신 ‘주기 운전’ 가능 여부 확인하기"
+    ];
+    let si = 0;
+    setInterval(() => {
+      si = (si + 1) % suggestions.length;
+      $("#todayOne").textContent = suggestions[si];
+    }, 3600);
+
+    // ---------------- Knowledge content ----------------
+    const KNOWLEDGE = [
+      {
+        id:"k1", tag:"피크(몰림)",
+        title:"피크 1시간이 ‘한 달’을 바꿉니다",
+        brief:"전기요금은 총량만이 아니라 ‘한 번에 몰림’이 비싸집니다. 해결은 ‘끄기’보다 ‘분산’입니다.",
+        minutes:"3분",
+        body: `
+          <div class="article">
+            <div class="callout"><b>핵심</b>: ‘전기 많이 쓰는 장비’가 아니라 <b>같이 켜지는 시간</b>이 문제입니다.</div>
+            <p>피크를 줄이는 가장 쉬운 방법은 “덜 쓰기”가 아니라 “<b>덜 겹치게</b> 쓰기”입니다.</p>
+            <ul class="bullets">
+              <li><b>오늘</b>: 바쁜 2시간을 고르고, 그 시간에 켜진 것 10개만 적기</li>
+              <li><b>내일</b>: 그 중 1개를 <b>10분 늦추기</b>(체감은 유지, 피크는 하락)</li>
+              <li><b>유지</b>: 가능하면 타이머/스케줄로 ‘자동’화</li>
+            </ul>
+            <div class="divider"></div>
+            <p>피크는 감정이 아니라 <b>시간표</b>입니다. 시간표를 바꾸면 돈도 바뀝니다.</p>
+          </div>
+        `
+      },
+      {
+        id:"k2", tag:"냉난방",
+        title:"온도를 낮추기보다 ‘운전 방식’을 바꾸세요",
+        brief:"‘시원함’은 유지하면서 요금은 낮추는 방법: 시작은 강하게, 이후는 ‘유지 운전’.",
+        minutes:"4분",
+        body: `
+          <div class="article">
+            <div class="callout"><b>핵심</b>: 목표는 ‘추움/더움’이 아니라 <b>피크 억제</b>입니다.</div>
+            <ul class="bullets">
+              <li>바쁠 때 계속 강풍 → 피크가 계속 유지됩니다</li>
+              <li><b>해법</b>: 시작 강하게(짧게) → 이후는 <b>유지 운전</b>으로 낮추기</li>
+              <li>문 열림이 잦으면 온도보다 <b>기류(루버/바람막이)</b>가 더 중요</li>
+            </ul>
+            <p>직원마다 “감”으로 조절하면 매일 피크가 새로 생깁니다. 기준(온도/풍량/시간)을 메모로 붙여주세요.</p>
+          </div>
+        `
+      },
+      {
+        id:"k3", tag:"야간 누수",
+        title:"새벽에 새는 전기: 작은 누수가 한 달을 먹습니다",
+        brief:"간판·환기·대기전력. ‘누가 책임지는가?’가 없으면 자동화가 답입니다.",
+        minutes:"3분",
+        body: `
+          <div class="article">
+            <div class="callout"><b>핵심</b>: 야간전력은 티가 안 나지만 <b>누적이 큽니다</b>.</div>
+            <ul class="bullets">
+              <li>간판/조명: 타이머로 <b>자동 OFF</b></li>
+              <li>환기/공기청정: ‘연속’ 대신 <b>주기 운전</b> 가능 여부 확인</li>
+              <li>대기전력: 멀티탭 스위치로 “안 쓰는 시간”을 명확히</li>
+            </ul>
+            <p>야간 누수의 특징은 “아무도 불편하지 않아서” 계속된다는 것. 그래서 자동화가 가장 현실적입니다.</p>
+          </div>
+        `
+      },
+      {
+        id:"k4", tag:"정직",
+        title:"절감이 ‘큰 폭’으로 안 되는 경우도 있습니다",
+        brief:"전문성은 ‘가능’만 말할 때가 아니라 ‘한계’도 말할 때 생깁니다.",
+        minutes:"3분",
+        body: `
+          <div class="article">
+            <div class="callout"><b>핵심</b>: 우리는 ‘안 될 수도 있다’를 먼저 말합니다.</div>
+            <ul class="bullets">
+              <li>이미 피크가 낮고(동시가동 관리됨) 운영 기준이 명확한 곳</li>
+              <li>야간 누수가 거의 없는 곳(자동 OFF/타이머/스케줄 잘 됨)</li>
+              <li>운영 구조상 바꿀 수 있는 여지가 작은 곳</li>
+            </ul>
+            <p>그래도 미세 개선은 가능하지만, “광고급 대폭 절감”은 어렵습니다. 이 정직함이 장기 신뢰를 만듭니다.</p>
+          </div>
+        `
+      },
+      {
+        id:"k5", tag:"직원 습관",
+        title:"절감은 의지가 아니라 ‘시스템’입니다",
+        brief:"사람에게 기대지 말고, 스위치 라벨·체크리스트·타이머로 ‘잊음’을 제거하세요.",
+        minutes:"4분",
+        body: `
+          <div class="article">
+            <div class="callout"><b>핵심</b>: 바쁜 매장일수록 “자동”이 절감을 유지합니다.</div>
+            <ul class="bullets">
+              <li>오픈/마감 체크리스트 5줄로 끝</li>
+              <li>스위치 라벨: “피크 시간엔 이것부터”</li>
+              <li>타이머/스케줄러: ‘잊음’을 시스템으로 제거</li>
+            </ul>
+            <p>의지는 흔들립니다. 시스템은 남습니다.</p>
+          </div>
+        `
+      },
+      {
+        id:"k6", tag:"지구/돈",
+        title:"전기 절감은 ‘지구’와 ‘통장’이 동시에 좋아집니다",
+        brief:"감동은 거창함이 아니라, 내가 하는 작은 변화가 실제로 쌓이는 느낌에서 옵니다.",
+        minutes:"2분",
+        body: `
+          <div class="article">
+            <div class="callout"><b>핵심</b>: 절감은 “내가 통제 가능한 영역”을 늘리는 일입니다.</div>
+            <p>우리는 ‘대단한 기술’보다, 누구나 할 수 있는 ‘작은 자동화’를 더 중요하게 봅니다.</p>
+            <ul class="bullets">
+              <li>돈: 매달 새는 구멍이 막히면, 고정비가 줄어듭니다</li>
+              <li>지구: 같은 서비스/쾌적함으로 전력을 덜 씁니다</li>
+              <li>마음: “내가 바꿀 수 있구나”라는 감각이 생깁니다</li>
+            </ul>
+          </div>
+        `
+      }
+    ];
+
+    // ---------------- Business playbooks ----------------
+    const BIZ = [
+      {
+        id:"b1", tag:"카페",
+        title:"카페: 냉장·제빙·에어컨 ‘겹침’ 줄이기",
+        brief:"오픈 직후 동시가동을 분산하면 효과가 빠릅니다.",
+        minutes:"체크 5개",
+        body: `
+          <div class="article">
+            <div class="callout"><b>카페의 핵심</b>: 24시간 장비 + 오픈 직후 몰림</div>
+            <ul class="bullets">
+              <li>오픈 직후 ‘제빙+조명+에어컨’을 동시에 켜지 않기(순서 분리)</li>
+              <li>제빙은 수요 피크에 맞춰 “필요 시간”만</li>
+              <li>문 열림이 잦으면 온도↓ 대신 기류(루버/바람막이)</li>
+              <li>간판/조명은 타이머로 자동 OFF</li>
+              <li>멀티탭 스위치로 대기전력 끊기</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        id:"b2", tag:"식당",
+        title:"식당: 주방 피크를 ‘조리 순서’로 낮추기",
+        brief:"한 번에 켜는 기계가 많을수록 피크가 뜁니다.",
+        minutes:"체크 5개",
+        body: `
+          <div class="article">
+            <div class="callout"><b>식당의 핵심</b>: 러시 타임 동시가동</div>
+            <ul class="bullets">
+              <li>러시 전 준비: “예열 시간표” 만들기(한 번에 다 켜지 않기)</li>
+              <li>환기/후드: 가능하면 주기 운전(공기질 기준)</li>
+              <li>냉난방은 러시 전에 미리 ‘완만하게’</li>
+              <li>마감 후 잔열/대기 장비 OFF 루틴</li>
+              <li>야간 누수: 간판/조명 자동 OFF</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        id:"b3", tag:"헬스장",
+        title:"헬스장: 기구보다 공조·환기·온수가 큽니다",
+        brief:"퇴근 후 피크 시간대에 겹치지 않게 분산하세요.",
+        minutes:"체크 5개",
+        body: `
+          <div class="article">
+            <div class="callout"><b>헬스장의 핵심</b>: 공조/환기/온수 동시가동</div>
+            <ul class="bullets">
+              <li>피크 시간(퇴근 후)에 공조+환기+온수 겹치는지 확인</li>
+              <li>환기는 연속 대신 주기 운전 가능 여부</li>
+              <li>샤워 온수: 예열 시간을 ‘피크 밖’으로 조정(가능 시)</li>
+              <li>조명 구역화(전체 ON 대신 구역 ON)</li>
+              <li>마감 자동화(스케줄/타이머)</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        id:"b4", tag:"모텔/숙박",
+        title:"숙박: ‘공실’의 전기를 줄이면 진짜 남습니다",
+        brief:"사람이 없을 때 켜져 있는 전기가 생각보다 큽니다.",
+        minutes:"체크 5개",
+        body: `
+          <div class="article">
+            <div class="callout"><b>숙박의 핵심</b>: 공실·공용부 전력 관리</div>
+            <ul class="bullets">
+              <li>공실 냉난방/조명 기본 룰 만들기</li>
+              <li>공용부 조명은 시간/동작 센서 활용(가능 범위)</li>
+              <li>세탁/건조는 피크 시간대 집중 운영 피하기</li>
+              <li>온수 예열 시간표</li>
+              <li>간판/외부조명 자동 OFF</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        id:"b5", tag:"학원",
+        title:"학원: 퇴근/등원 시간대 ‘한 번에 켜짐’ 줄이기",
+        brief:"교실별로 켜는 순서를 만들면 피크가 낮아집니다.",
+        minutes:"체크 5개",
+        body: `
+          <div class="article">
+            <div class="callout"><b>학원의 핵심</b>: 특정 시간대 급격한 동시가동</div>
+            <ul class="bullets">
+              <li>교실 냉난방은 순차 ON(동시에 X)</li>
+              <li>쉬는 시간에 전력(조명/환기) 기준 정하기</li>
+              <li>야간 대기전력(정수기/공기청정 등) 관리</li>
+              <li>주말/휴일 스케줄 고정</li>
+              <li>마감 체크리스트 5줄</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        id:"b6", tag:"사무실",
+        title:"사무실: ‘대기전력’과 ‘스케줄’이 승부처",
+        brief:"항상 켜져 있는 PC/모니터/공조를 정리하세요.",
+        minutes:"체크 5개",
+        body: `
+          <div class="article">
+            <div class="callout"><b>사무실의 핵심</b>: 대기전력 + 불필요한 상시운전</div>
+            <ul class="bullets">
+              <li>PC/모니터 절전 정책(자동 꺼짐)</li>
+              <li>공조는 ‘사람 있을 때’ 중심으로 스케줄</li>
+              <li>회의실/창고 조명 자동 OFF(가능 범위)</li>
+              <li>프린터/주변기기 멀티탭 스위치</li>
+              <li>주말/야간 스케줄 고정</li>
+            </ul>
+          </div>
+        `
+      },
+      {
+        id:"b7", tag:"공장/창고",
+        title:"공장/창고: ‘동력’은 한 번 튀면 큽니다",
+        brief:"동시가동을 분산하고, 불필요한 공회전을 줄이세요.",
+        minutes:"체크 5개",
+        body: `
+          <div class="article">
+            <div class="callout"><b>공장의 핵심</b>: 동력 설비 동시가동 + 공회전</div>
+            <ul class="bullets">
+              <li>가동 시작을 순차로(동시에 켜지 않기)</li>
+              <li>공회전/유휴 운전 줄이기(체크포인트 지정)</li>
+              <li>피크 시간대 작업 스케줄 재배치(가능 범위)</li>
+              <li>조명 구역화(필요 구역만)</li>
+              <li>야간 누수 확인(공조/환기/컴프레서 등)</li>
+            </ul>
+          </div>
+        `
+      }
+    ];
+
+    // ---------------- Render Cards ----------------
+    const kGrid = $("#kGrid");
+    const bizGrid = $("#bizGrid");
+
+    function render(list, gridEl){
+      gridEl.innerHTML = "";
+      list.forEach(item => {
+        const el = document.createElement("div");
+        el.className = "card";
+        el.setAttribute("data-open", item.id);
+        el.innerHTML = `
+          <div class="tag">${item.tag}</div>
+          <h3>${item.title}</h3>
+          <p>${item.brief}</p>
+          <div class="foot"><span>⏱ ${item.minutes}</span><span>클릭해서 보기</span></div>
+        `;
+        gridEl.appendChild(el);
+      });
+      attachOpenHandlers();
+    }
+    render(KNOWLEDGE, kGrid);
+    render(BIZ, bizGrid);
+
+    // ---------------- Modal ----------------
+    const modal = $("#modal");
+    const modalTitle = $("#modalTitle");
+    const modalBody = $("#modalBody");
+
+    function openModal(item){
+      modalTitle.textContent = item.title;
+      modalBody.innerHTML = item.body;
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+    function closeModal(){
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    $("#closeModal").addEventListener("click", closeModal);
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
+    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeModal(); });
+
+    function attachOpenHandlers(){
+      $$("[data-open]").forEach(card => {
+        if(card.__bound) return;
+        card.__bound = true;
+        card.addEventListener("click", () => {
+          const id = card.getAttribute("data-open");
+          const item = KNOWLEDGE.find(x => x.id === id) || BIZ.find(x => x.id === id);
+          if(item) openModal(item);
+        });
+      });
+    }
+
+    // ---------------- Search ----------------
+    const q = $("#q");
+    $("#clearSearch").addEventListener("click", () => {
+      q.value = "";
+      render(KNOWLEDGE, kGrid);
+      toast("검색 초기화", "전체 지식을 다시 보여드립니다.");
+    });
+
+    q.addEventListener("input", () => {
+      const s = q.value.trim().toLowerCase();
+      if(!s){ render(KNOWLEDGE, kGrid); return; }
+      const filtered = KNOWLEDGE.filter(k =>
+        (k.tag + " " + k.title + " " + k.brief).toLowerCase().includes(s)
+      );
+      render(filtered, kGrid);
+    });
+
+    // ---------------- Calculator ----------------
+    const calcForm = $("#calcForm");
+    const mSave = $("#mSave");
+    const ySave = $("#ySave");
+    const co2Save = $("#co2Save");
+    const mHint = $("#mHint");
+    const nextStep = $("#nextStep");
+
+    // Very minimal "carbon feel" factor: not a claim, a gentle sense.
+    // We convert savings KRW -> kWh with rough unit price assumptions, then kWh -> kgCO2 with a generic factor.
+    // This is intentionally labeled as a "감각" not an exact value.
+    function estimateCO2Feel(monthlySavedKRW){
+      const avgKRWperKWh = 180; // rough, for "feel" only (varies by contract)
+      const kWh = monthlySavedKRW / avgKRWperKWh;
+      const kgCO2 = kWh * 0.4; // generic feel factor (varies by grid)
+      if(!isFinite(kgCO2)) return "—";
+      if(kgCO2 < 10) return "작게 가벼워짐";
+      if(kgCO2 < 40) return "꽤 의미 있음";
+      if(kgCO2 < 120) return "확실히 체감";
+      return "큰 여유를 만듦";
+    }
+
+    function focusText(focus){
+      if(focus === "peak") return "추천: ‘겹침(동시가동)’을 10분만 분산하세요.";
+      if(focus === "night") return "추천: ‘야간 누수’를 타이머/스위치로 끊으세요.";
+      return "추천: 냉난방은 ‘감’이 아니라 ‘기준(온도/시간)’으로.";
+    }
+
+    calcForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const bill = Number($("#bill").value);
+      const level = Number($("#level").value);
+      const focus = $("#focus").value;
+      const biz = $("#cBiz").value || "—";
+
+      // Focus tweak: small but meaningful nudge
+      const focusBoost = focus === "peak" ? 1.05 : focus === "night" ? 1.02 : 1.03;
+
+      // Estimated savings
+      const monthSave = Math.max(0, bill * level * focusBoost);
+      const yearSave = monthSave * 12;
+
+      mSave.textContent = fmtKRW(monthSave);
+      ySave.textContent = fmtKRW(yearSave);
+
+      co2Save.textContent = estimateCO2Feel(monthSave);
+      mHint.textContent = `${biz} 기준, ‘현실적인 대략’입니다.`;
+      nextStep.innerHTML = `다음 한 걸음: <b>${focusText(focus)}</b> (10분짜리 1개가 가장 강합니다)`;
+
+      toast("계산 완료", "이제 ‘가장 쉬운 1개’를 고르면 됩니다.");
+    });
+
+    $("#fillExample").addEventListener("click", () => {
+      $("#cBiz").value = "카페";
+      $("#bill").value = 1200000;
+      $("#level").value = "0.12";
+      $("#focus").value = "peak";
+      toast("예시 입력", "카페 · 월 120만원 기준으로 넣었어요.");
+    });
+
+    // ---------------- Dodge Game (Lightning Avoid) ----------------
+    const canvas = $("#gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const scoreEl = $("#score");
+
+    let running = false;
+    let last = 0;
+    let score = 0;
+    let best = 0;
+
+    const W = canvas.width;
+    const H = canvas.height;
+
+    const player = {
+      x: W/2,
+      y: H - 38,
+      r: 14,
+      vx: 0,
+      speed: 520,
+    };
+
+    const bolts = [];
+    const sparks = [];
+
+    const keys = { left:false, right:false };
+    function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+
+    function resetGame(){
+      running = false;
+      score = 0;
+      bolts.length = 0;
+      sparks.length = 0;
+      player.x = W/2;
+      player.vx = 0;
+      scoreEl.textContent = "0";
+      draw(0);
+      toast("리셋", "준비 완료. 시작을 눌러요.");
+    }
+
+    function spawnBolt(){
+      // bolts fall; some come in "clusters" to teach 'overlap'
+      const x = Math.random() * (W - 40) + 20;
+      const size = Math.random() * 10 + 12;
+      const speed = 220 + Math.random() * 260 + Math.min(220, score * 2.2);
+      bolts.push({ x, y: -30, w: size, h: size*2.2, v: speed, wob: Math.random()*2.5 + 1.0 });
+    }
+
+    function addSpark(x,y){
+      for(let i=0;i<12;i++){
+        sparks.push({
+          x,y,
+          vx:(Math.random()*2-1)*160,
+          vy:(Math.random()*2-1)*160,
+          life: 0.6 + Math.random()*0.4
+        });
+      }
+    }
+
+    function collides(b){
+      // circle-rect approx
+      const cx = clamp(player.x, b.x - b.w/2, b.x + b.w/2);
+      const cy = clamp(player.y, b.y, b.y + b.h);
+      const dx = player.x - cx;
+      const dy = player.y - cy;
+      return (dx*dx + dy*dy) < (player.r*player.r);
+    }
+
+    function tick(t){
+      if(!running){ last = t; return requestAnimationFrame(tick); }
+      const dt = Math.min(0.032, (t - last) / 1000);
+      last = t;
+
+      // input
+      const dir = (keys.left ? -1 : 0) + (keys.right ? 1 : 0);
+      player.vx = dir * player.speed;
+      player.x = clamp(player.x + player.vx * dt, player.r + 10, W - player.r - 10);
+
+      // spawn rate increases gently
+      const rate = 0.70 + Math.min(0.95, score / 120);
+      if(Math.random() < rate * dt){
+        spawnBolt();
+        if(Math.random() < 0.15) spawnBolt(); // occasional overlap
+      }
+
+      // update bolts
+      for(let i=bolts.length-1;i>=0;i--){
+        const b = bolts[i];
+        b.y += b.v * dt;
+        b.x += Math.sin((t/1000) * b.wob) * 0.8; // subtle wobble
+
+        if(collides(b)){
+          running = false;
+          addSpark(player.x, player.y);
+          best = Math.max(best, score);
+          toast("앗!", `번개에 닿았어요. 점수: ${score} (최고: ${best})`);
+        }
+        if(b.y > H + 60) bolts.splice(i,1);
+      }
+
+      // update sparks
+      for(let i=sparks.length-1;i>=0;i--){
+        const s = sparks[i];
+        s.life -= dt;
+        s.x += s.vx * dt;
+        s.y += s.vy * dt;
+        s.vx *= (1 - dt*2.2);
+        s.vy *= (1 - dt*2.2);
+        if(s.life <= 0) sparks.splice(i,1);
+      }
+
+      // score
+      score += Math.floor(60 * dt);
+      scoreEl.textContent = String(score);
+
+      draw(t);
+      requestAnimationFrame(tick);
+    }
+
+    function draw(t){
+      // background
+      ctx.clearRect(0,0,W,H);
+
+      // warm grid
+      ctx.save();
+      ctx.globalAlpha = 0.16;
+      ctx.strokeStyle = "rgba(249,115,22,.35)";
+      for(let x=20;x<W;x+=40){
+        ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
+      }
+      for(let y=20;y<H;y+=40){
+        ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
+      }
+      ctx.restore();
+
+      // cozy glow
+      ctx.save();
+      const g = ctx.createRadialGradient(W*0.25, H*0.15, 20, W*0.25, H*0.15, 420);
+      g.addColorStop(0, "rgba(249,115,22,.18)");
+      g.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0,0,W,H);
+      ctx.restore();
+
+      // bolts
+      for(const b of bolts){
+        // bolt shape
+        ctx.save();
+        ctx.translate(b.x, b.y);
+        ctx.fillStyle = "rgba(249,115,22,.88)";
+        ctx.shadowColor = "rgba(249,115,22,.35)";
+        ctx.shadowBlur = 14;
+
+        ctx.beginPath();
+        ctx.moveTo(-b.w*0.25, 0);
+        ctx.lineTo(b.w*0.20, b.h*0.45);
+        ctx.lineTo(0, b.h*0.45);
+        ctx.lineTo(b.w*0.30, b.h);
+        ctx.lineTo(-b.w*0.20, b.h*0.58);
+        ctx.lineTo(0, b.h*0.58);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.restore();
+      }
+
+      // player (a warm “shield”)
+      ctx.save();
+      ctx.shadowColor = "rgba(37,99,235,.22)";
+      ctx.shadowBlur = 16;
+      ctx.fillStyle = "rgba(37,99,235,.86)";
+      ctx.beginPath();
+      ctx.arc(player.x, player.y, player.r, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+
+      // player ring
+      ctx.save();
+      ctx.strokeStyle = "rgba(255,255,255,.92)";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(player.x, player.y, player.r-1.5, 0, Math.PI*2);
+      ctx.stroke();
+      ctx.restore();
+
+      // sparks
+      for(const s of sparks){
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, s.life);
+        ctx.fillStyle = "rgba(249,115,22,.90)";
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, 2.2, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // overlay text
+      ctx.save();
+      ctx.fillStyle = "rgba(15,23,42,.68)";
+      ctx.font = "700 14px " + getComputedStyle(document.body).fontFamily;
+      if(!running){
+        ctx.fillText("시작 버튼을 누르고, 번개(피크)를 피하세요.", 18, 26);
+        ctx.font = "600 12px " + getComputedStyle(document.body).fontFamily;
+        ctx.fillText("요령: 한쪽으로만 몰리지 말고 ‘분산’ 움직임.", 18, 46);
+      }else{
+        ctx.fillText("분산이 답이다. (겹치면 위험)", 18, 26);
+      }
+      ctx.restore();
+    }
+
+    // controls
+    window.addEventListener("keydown", (e)=>{
+      const k = e.key.toLowerCase();
+      if(k === "arrowleft" || k === "a") keys.left = true;
+      if(k === "arrowright" || k === "d") keys.right = true;
+      if(k === " "){ // space to start/pause
+        e.preventDefault();
+        if(!running){ start(); }
+      }
+    });
+    window.addEventListener("keyup", (e)=>{
+      const k = e.key.toLowerCase();
+      if(k === "arrowleft" || k === "a") keys.left = false;
+      if(k === "arrowright" || k === "d") keys.right = false;
+    });
+
+    // mobile drag
+    let dragging = false;
+    canvas.addEventListener("pointerdown", (e)=>{
+      dragging = true;
+      canvas.setPointerCapture(e.pointerId);
+      if(!running) start();
+    });
+    canvas.addEventListener("pointermove", (e)=>{
+      if(!dragging) return;
+      const rect = canvas.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width * W;
+      player.x = clamp(px, player.r + 10, W - player.r - 10);
+    });
+    canvas.addEventListener("pointerup", ()=> dragging = false);
+
+    function start(){
+      if(running) return;
+      running = true;
+      toast("시작!", "번개(피크)를 피하세요.");
+    }
+
+    $("#startGame").addEventListener("click", start);
+    $("#resetGame").addEventListener("click", resetGame);
+
+    // initial paint
+    $("#year").textContent = new Date().getFullYear();
+    resetGame();
+    requestAnimationFrame((t)=>{ last=t; tick(t); });
+
+    // little welcome
+    setTimeout(()=>toast("환영해요", "지식 → 계산 → 게임 순서로 즐겨보세요."), 700);
+  </script>
+</body>
+</html>
